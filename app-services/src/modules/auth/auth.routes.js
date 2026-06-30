@@ -1,0 +1,11 @@
+import { Router } from "express";
+import { authLimiter } from "../../shared/middleware/rateLimiter.js";
+import { signupController,loginController,refreshController,logoutController,meController } from "./auth.controller.js";
+import { authenticate } from "../../shared/middleware/authenticate.js";
+const router = Router();
+router.post('/signup',authLimiter,signupController);
+router.post('/login',authLimiter,loginController);
+router.post('/refresh', refreshController);
+router.post('/logout', logoutController);
+router.get('/me', authenticate, meController);
+export default router;

@@ -1,0 +1,36 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: slotted-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: slotted
+      POSTGRES_USER: slotted
+      POSTGRES_PASSWORD: slotted_dev_pw
+
+    ports:
+      - "5433:5432"
+
+    volumes:
+      - slotted_pg_data:/var/lib/postgresql/data
+      - ./db/migrations:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U slotted"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    image: redis:7-alpine
+    container_name: slotted-redis
+    restart: unless-stopped
+
+    ports:
+      - "6379:6379"
+
+volumes:
+  slotted_pg_data:
