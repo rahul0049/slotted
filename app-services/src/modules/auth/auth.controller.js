@@ -62,7 +62,7 @@ export const logoutController = async (req, res) => {
 
 export const meController = async (req, res) => {
   try {
-    const user = await findUserById(req.user.id);
+    const user = await findUserById({id:req.user.id});
     res.status(200).json({ user });
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message });
