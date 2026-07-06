@@ -1,4 +1,4 @@
-import { createBooking, getBooking,releaseLock, getUserBookings, lockSeat } from "./booking.service.js";
+import { createBooking, getBooking,releaseSeat, getUserBookings, lockSeat } from "./booking.service.js";
 
 export const lockSeatController = async(req,res)=>{
     try {
@@ -14,7 +14,7 @@ export const releaseLockController = async (req, res) => {
   try {
     const { unitId } = req.params;
     const userId = req.user.id;
-    const result = await releaseLock(unitId, userId);
+    const result = await releaseSeat(unitId, userId);
     res.status(200).json(result);
   } catch (err) {
     res.status(err.status || 500).json({ error: err.message });

@@ -7,6 +7,15 @@ import redisClient from './shared/redis.js';
 import bookingRoutes from './modules/booking/booking.routes.js'
 import catalogRoutes from './modules/catalog/catalog.routes.js';
 const app = express();
+app.use('/api/payment/webhook',(req,res,next)=>{
+  let raw ='';
+  req.on('data',chunk=>raw+=chunk);
+  req.on('end',()=>{
+    req.rawBody=raw;
+    req.body=JSON.parse(raw);
+    next();
+  });
+});
 app.use(express.json());
 app.use('/api/auth',authRoutes);
 app.use('/api/catalog',catalogRoutes);

@@ -1,4 +1,4 @@
-import { query,pool } from "../../shared/db/index.js";
+import { query,Pool } from "../../shared/db/index.js";
 import redisClient from "../../shared/redis.js";
 const LOCK_TTL_SECONDS=600;
 
@@ -37,7 +37,7 @@ export const findBookingByIdempotencyKey = async(key)=>{
 
 
 export const createBookingTransaction = async ({userId,providerId,unitIds,totalAmount,idempotencyKey})=>{
-    const client = await pool.connect();
+    const client = await Pool.connect();
     try {
         await client.query(`BEGIN`);
         const placeholders = unitIds.map((_,i)=>`$${i+1}`).join(', ');
