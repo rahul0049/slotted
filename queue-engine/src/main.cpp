@@ -79,11 +79,13 @@ int main() {
             long long total = redis.zcard("waitlist:" + providerId);
             bool eligible   = pos != -1 &&
                               pos < static_cast<long long>(allowedThrough);
-
+            long long aheadOfThreshold = std::max(0LL, pos - static_cast<long long>(allowedThrough));
+            long long estimatedWaitMins = (aheadOfThreshold * 30) / 60;
             crow::json::wvalue res;
             res["position"]  = pos;      
             res["total"]     = total;
             res["eligible"]  = eligible;
+            res["estimatedWaitMins"]=estimatedWaitMins;
             return crow::response(200, res);
         } catch (const std::exception& e) {
             return crow::response(500, std::string(e.what()));

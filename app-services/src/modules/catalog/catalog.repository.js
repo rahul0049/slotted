@@ -51,3 +51,50 @@ export const findInventoryByProvider = async (providerId)=>{
     );
     return result.rows;
 }
+
+export const insertProvider = async ({ name, type, venueId, saleStartsAt, eventAt, metadata }) => {
+  const result = await query(
+    `INSERT INTO providers (name, type, venue_id, sale_starts_at, event_at, metadata)
+     VALUES ($1, $2, $3, $4, $5, $6)
+     RETURNING *`,
+    [name, type, venueId, saleStartsAt, eventAt, metadata]
+  );
+  return result.rows[0];
+};
+
+export const insertVenue = async ({ name, city, address }) => {
+  const result = await query(
+    `INSERT INTO venues (name, city, address)
+     VALUES ($1, $2, $3)
+     RETURNING *`,
+    [name, city, address]
+  );
+  return result.rows[0];
+};
+
+export const insertInventoryUnits = async (units) => {
+  const results = [];
+  for (const unit of units) {
+    const result = await query(
+      `INSERT INTO inventory_units (provider_id, unit_type, label, price, metadata)
+       VALUES ($1, $2, $3, $4, $5)
+       RETURNING *`,
+      [unit.providerId, unit.unitType, unit.label, unit.price, JSON.stringify(unit.metadata)]
+    );
+    results.push(result.rows[0]);
+  }
+  return results;
+};
+
+export const findVenueById = async (id) => {
+  const result = await query(
+    `SELECT * FROM venues WHERE id = $1`,
+    [id]
+  );
+  return result.rows[0];
+};
+
+export const findAllVenues = async () => {
+  const result = await query(`SELECT * FROM venues ORDER BY name ASC`);
+  return result.rows;
+};
