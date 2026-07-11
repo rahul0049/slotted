@@ -4,4 +4,6 @@ node_modules/
 logs
 data/
 postgres-data/
-redis-data/
+redis-data/queue_engine/build/
+node_modules/
+build/

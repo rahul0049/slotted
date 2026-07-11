@@ -4,30 +4,33 @@ project(queue_engine)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-# hiredis
-find_library(HIREDIS_LIB hiredis REQUIRED)
-find_path(HIREDIS_INCLUDE hiredis/hiredis.h REQUIRED)
-
-
+# Crow HTTP framework
 include(FetchContent)
 FetchContent_Declare(
   crow
   GIT_REPOSITORY https://github.com/CrowCpp/Crow.git
-  GIT_TAG        v1.0+5
+  GIT_TAG        v1.2.0
 )
+set(CROW_USE_BOOST OFF CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(crow)
 
-# collect all sources
-file(GLOB_RECURSE SOURCES src/*.cpp)
+find_library(HIREDIS_LIB hiredis REQUIRED)
 
-add_executable(queue_engine ${SOURCES})
+find_library(REDIS_PLUS_PLUS_LIB redis++ REQUIRED)
+find_path(REDIS_PLUS_PLUS_INCLUDE sw/redis++/redis++.h REQUIRED)
+
+add_executable(queue_engine
+  src/main.cpp
+  src/queue_manager.cpp
+)
 
 target_include_directories(queue_engine PRIVATE
   include
-  ${HIREDIS_INCLUDE}
+  ${REDIS_PLUS_PLUS_INCLUDE}
 )
 
 target_link_libraries(queue_engine PRIVATE
   ${HIREDIS_LIB}
+  ${REDIS_PLUS_PLUS_LIB}
   Crow::Crow
 )
