@@ -6,6 +6,8 @@ import { query } from './shared/db/index.js';
 import redisClient from './shared/redis.js';
 import bookingRoutes from './modules/booking/booking.routes.js'
 import catalogRoutes from './modules/catalog/catalog.routes.js';
+import queueRoutes from './modules/queue/queue.routes.js';
+
 const app = express();
 app.use('/api/payment/webhook',(req,res,next)=>{
   let raw ='';
@@ -18,6 +20,7 @@ app.use('/api/payment/webhook',(req,res,next)=>{
 });
 app.use(express.json());
 app.use('/api/auth',authRoutes);
+app.use('/api/queue', queueRoutes);
 app.use('/api/catalog',catalogRoutes);
 app.use('/api/booking',bookingRoutes);
 app.get('/health', async (req, res) => {

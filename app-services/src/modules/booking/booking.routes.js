@@ -5,10 +5,9 @@ const router = Router();
 import { checkQueueEligibility } from "../../shared/middleware/checkQueueEligibility.js";
 
 router.use(authenticate);
-router.post('/lock/:userId',lockSeatController);
-router.delete('/lock/:userId',releaseLockController);
+router.post('/lock/:unitId',checkQueueEligibility((req)=>req.body.providerId),lockSeatController);
+router.delete('/lock/:unitId',releaseLockController);
 router.post('/',createBookingController);
 router.get('/',getUserBookingsController);
 router.get('/:id',getBookingController);
-router.post('/lock/:unitId',authenticate,checkQueueEligibility((req)=>req.body.providerId),lockSeatController);
 export default router;

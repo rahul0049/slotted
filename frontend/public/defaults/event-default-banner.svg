@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="700" viewBox="0 0 1600 700" fill="none">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1600" y2="700" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#24343A"/>
+      <stop offset="1" stop-color="#0F766E"/>
+    </linearGradient>
+  </defs>
+  <rect width="1600" height="700" fill="url(#bg)"/>
+  <circle cx="1290" cy="100" r="190" fill="#EF7D57" opacity="0.28"/>
+  <circle cx="260" cy="610" r="230" fill="#F8D7B5" opacity="0.2"/>
+  <rect x="126" y="170" width="660" height="56" rx="12" fill="#FFFFFF" opacity="0.94"/>
+  <rect x="126" y="248" width="460" height="30" rx="10" fill="#FFFFFF" opacity="0.6"/>
+  <rect x="126" y="302" width="390" height="30" rx="10" fill="#FFFFFF" opacity="0.4"/>
+  <rect x="126" y="390" width="230" height="64" rx="14" fill="#EF7D57"/>
+  <text x="171" y="432" fill="#FFFFFF" font-size="32" font-family="Arial, sans-serif" font-weight="700">Join Queue</text>
+  <text x="126" y="110" fill="#F8F1E5" font-size="38" font-family="Arial, sans-serif" font-weight="700">Slotted</text>
+</svg>

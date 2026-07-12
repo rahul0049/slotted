@@ -5,7 +5,26 @@
 #include <iostream>
 
 using namespace sw::redis;
+struct CORS {
+    struct context {};
 
+    void before_handle(crow::request& req, crow::response& res, context&) {
+        res.set_header("Access-Control-Allow-Origin", "http://localhost:5173");
+        res.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+
+        if (req.method == crow::HTTPMethod::Options) {
+            res.code = 204;
+            res.end();
+        }
+    }
+
+    void after_handle(crow::request&, crow::response& res, context&) {
+        res.set_header("Access-Control-Allow-Origin", "http://localhost:5173");
+        res.set_header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+        res.set_header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    }
+};
 int main() {
     std::string redisUrl  = std::getenv("REDIS_URL")
                             ? std::getenv("REDIS_URL")
@@ -20,7 +39,7 @@ int main() {
     Redis redis(redisUrl);
     std::cout << "Connected to Redis\n";
 
-    crow::SimpleApp app;
+    crow::App<CORS> app;
     CROW_ROUTE(app, "/queue/join").methods(crow::HTTPMethod::POST)
     ([&redis](const crow::request& req) {
         auto body = crow::json::load(req.body);
@@ -28,7 +47,9 @@ int main() {
             return crow::response(400, R"({"error":"providerId and userId required"})");
         }
         try {
-            joinPreQueue(redis, body["providerId"].s(), body["userId"].s());
+            joinLate(redis,
+         body["providerId"].s(),
+         body["userId"].s());
             crow::json::wvalue res;
             res["joined"] = true;
             return crow::response(200, res);

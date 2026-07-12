@@ -1,6 +1,4 @@
-import { listProviders,getProvider,listInventory,listProviders,
-  getProvider,
-  listInventory,
+import { getProvider,listInventory,listProviders,
   createVenue,
   createProvider,
   createInventory,

@@ -7,6 +7,7 @@ import { listProvidersController,
   createInventoryController,
   listVenuesController, } from './catalog.controller.js';
 import { authenticate } from '../../shared/middleware/authenticate.js';
+import { authorize } from '../../shared/middleware/authorize.js';
 const router = Router();
 router.get('/providers',listProvidersController);
 router.get('/providers/:id',getProviderController);

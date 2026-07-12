@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1400" height="820" viewBox="0 0 1400 820" fill="none">
+  <rect width="1400" height="820" fill="#F8F1E5"/>
+  <rect x="42" y="42" width="1316" height="736" rx="30" fill="#FFFDF8" stroke="#D7C8AE" stroke-width="6"/>
+  <ellipse cx="700" cy="410" rx="250" ry="145" fill="#D9EED9" stroke="#9FC49F" stroke-width="4"/>
+  <rect x="655" y="355" width="90" height="110" rx="10" fill="#65A765"/>
+  <text x="673" y="420" fill="#FFFFFF" font-size="28" font-family="Arial, sans-serif" font-weight="700">P</text>
+  <rect x="188" y="132" width="220" height="112" rx="20" fill="#E8D8BF" stroke="#CFBFA2"/>
+  <text x="247" y="198" fill="#1F2A2E" font-size="30" font-family="Arial, sans-serif" font-weight="700">North</text>
+  <rect x="1000" y="132" width="220" height="112" rx="20" fill="#E8D8BF" stroke="#CFBFA2"/>
+  <text x="1067" y="198" fill="#1F2A2E" font-size="30" font-family="Arial, sans-serif" font-weight="700">East</text>
+  <rect x="188" y="576" width="220" height="112" rx="20" fill="#E8D8BF" stroke="#CFBFA2"/>
+  <text x="247" y="642" fill="#1F2A2E" font-size="30" font-family="Arial, sans-serif" font-weight="700">West</text>
+  <rect x="1000" y="576" width="220" height="112" rx="20" fill="#E8D8BF" stroke="#CFBFA2"/>
+  <text x="1064" y="642" fill="#1F2A2E" font-size="30" font-family="Arial, sans-serif" font-weight="700">South</text>
+  <text x="78" y="748" fill="#67747A" font-size="24" font-family="Arial, sans-serif" font-weight="600">Provider stadium layout not uploaded. Showing default guidance map.</text>
+</svg>
